@@ -57,13 +57,10 @@ int main(int argc, char *argv[])
 {
     string in = "";
     string out = "";
-    bool show_solution = false;
     int initial = 1;
 
-    for (int i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-h") == 0)
-        {
+    for (int i = 1; i < argc; i++){
+        if (strcmp(argv[i], "-h") == 0){
             cout << "Help:" << endl;
             cout << "-h: mostra o help" << endl;
             cout << "-o <arquivo>: redireciona a saida para o 'arquivo'" << endl;
@@ -72,16 +69,13 @@ int main(int argc, char *argv[])
             
             return 0;
         }
-        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1){
             out = argv[++i];
         }
-        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1){
             in = argv[++i];
         }
-        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1){
             initial = atoi(argv[++i]);
         }
     }
@@ -105,8 +99,7 @@ int main(int argc, char *argv[])
 
     int a, b, cost;
 
-    for (int i = 0; i < E; i++)
-    {
+    for (int i = 0; i < E; i++){
         fin >> a >> b >> cost;
         g.addEdge(a, b, cost);
     }
@@ -115,11 +108,9 @@ int main(int argc, char *argv[])
 
     vector<int> distances = g.path(initial);
 
-    if (not (out == ""))
-    {
+    if (not (out == "")){
         ofstream fout(out);
-        if (!fout)
-        {
+        if (not fout){
             cerr << "Could not open output file: " << out << endl;
             return 1;
         }
