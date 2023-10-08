@@ -14,9 +14,9 @@ vector<pair<int, int>> prim(vector<pair<int, int>> adj[], int N, int & sum, int 
     int cost[N + 1]; 
     bool visited[N + 1];
 
-    for (int i = 1; i <= N; i++){
-        cost[i] = INT_MAX;
+    for(int i = 1; i <= N; i++){
         visited[i] = false;
+        cost[i] = INT_MAX;
     }
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> queue;//Fila de prioridade
