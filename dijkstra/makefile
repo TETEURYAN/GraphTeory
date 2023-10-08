@@ -1,9 +1,9 @@
 CC = g++
 CFLAGS = -std=c++11
 
-all: dijkstra.bin
+all: dijkstra
 
-dijkstra.bin: dijkstra.cpp
+dijkstra: dijkstra.cpp
 	$(CC) $(CFLAGS) dijkstra.cpp -o dijkstra.bin
 
 clean:
