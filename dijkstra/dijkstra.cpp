@@ -4,29 +4,7 @@ using namespace std;
 
 typedef pair<int, int> pares;
 
-class graph {
-    int V;
-    list<pair<int, int>>* adj;
-
-public:
-    graph(int V);
-    void addEdge(int u, int v, int cost);
-    vector<int> path(int src);
-};
-
-graph::graph(int V)
-{
-    this->V = V;
-    adj = new list<pares>[V + 1];
-}
-
-void graph::addEdge(int u, int v, int cost)
-{
-    adj[u].push_back(make_pair(v, cost));
-    adj[v].push_back(make_pair(u, cost));
-}
-
-vector<int> graph::path(int src)
+vector<int> path(int src, int V, list<pair<int, int>> * arestas)
 {
     priority_queue<pares, vector<pares>, greater<pares>> queue;
     vector<int> dist(V + 1, max);
@@ -37,9 +15,9 @@ vector<int> graph::path(int src)
     while (not queue.empty()) {
         int u = queue.top().second;
         queue.pop();
-
+        
         list<pair<int, int>>::iterator i;
-        for (i = adj[u].begin(); i != adj[u].end(); ++i) {
+        for (i = arestas[u].begin(); i != arestas[u].end(); i++) {
             int v = (*i).first;
             int peso = (*i).second;
 
@@ -59,8 +37,10 @@ int main(int argc, char *argv[])
     string out = "";
     int initial = 1;
 
-    for (int i = 1; i < argc; i++){
-        if (strcmp(argv[i], "-h") == 0){
+    for (int i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-h") == 0)
+        {
             cout << "Help:" << endl;
             cout << "-h: mostra o help" << endl;
             cout << "-o <arquivo>: redireciona a saida para o 'arquivo'" << endl;
@@ -69,13 +49,16 @@ int main(int argc, char *argv[])
             
             return 0;
         }
-        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1)
+        {
             out = argv[++i];
         }
-        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1)
+        {
             in = argv[++i];
         }
-        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1)
+        {
             initial = atoi(argv[++i]);
         }
     }
@@ -94,23 +77,26 @@ int main(int argc, char *argv[])
 
     int V, E;
     fin >> V >> E;
-    graph g(V);
-
 
     int a, b, cost;
+    list<pair<int, int>> arestas[V + 1];
 
-    for (int i = 0; i < E; i++){
+    for (int i = 0; i < E; i++)
+    {
         fin >> a >> b >> cost;
-        g.addEdge(a, b, cost);
+        arestas[b].push_back(make_pair(a, cost));
+        arestas[a].push_back(make_pair(b, cost));
     }
 
     fin.close();
 
-    vector<int> distances = g.path(initial);
+    vector<int> distances = path(initial, V, arestas);
 
-    if (not (out == "")){
+    if (not (out == ""))
+    {
         ofstream fout(out);
-        if (not fout){
+        if (not fout)
+        {
             cerr << "Could not open output file: " << out << endl;
             return 1;
         }
