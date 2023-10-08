@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 bool compare(const pair<pair<int, int>, int> &a, const pair<pair<int, int>, int> &b){
     return a.second < b.second;
 }
