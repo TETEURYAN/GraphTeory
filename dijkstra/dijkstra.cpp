@@ -4,13 +4,13 @@ using namespace std;
 
 typedef pair<int, int> pares;
 
-vector<int> path(int src, int V, list<pair<int, int>> * arestas)
+vector<int> path(int init, int V, list<pares> * arestas)
 {
     priority_queue<pares, vector<pares>, greater<pares>> queue;
     vector<int> dist(V + 1, max);
 
     queue.push(make_pair(0, src));
-    dist[src] = 0;
+    dist[init] = 0;
 
     while (not queue.empty()) {
         int u = queue.top().second;
