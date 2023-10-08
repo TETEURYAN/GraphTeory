@@ -1,28 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool compare(const pair<int, int> &a, const pair<int, int> &b){ //funcao que compara em função do peso
+bool compare(const pair<int, int> &a, const pair<int, int> &b){ 
     if (a.first != b.first) return a.first < b.first;
     else  return a.second < b.second;
 }
 
-pair<vector<pair<int, int>>, int> prim(vector<pair<int, int>> adj[], int N, int init) // Função da árvore geradora mínima 
+vector<pair<int, int>> prim(vector<pair<int, int>> adj[], int N, int & sum, int init) 
 {
-    vector<pair<int, int>> result; // vetor de resultado (vertice, pai))
+    vector<pair<int, int>> result; 
 
-    int parent[N + 1]; //vetor de pai
-    int cost[N + 1]; //vetor de custo
-    bool visited[N + 1];// vetor de visitado
+    int parent[N + 1]; 
+    int cost[N + 1]; 
+    bool visited[N + 1];
 
-    for (int i = 1; i <= N; i++){//Custo infinito e nenhum visitado
+    for (int i = 1; i <= N; i++){
         cost[i] = INT_MAX;
         visited[i] = false;
     }
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> queue;//Fila de prioridade
 
-    cost[1] = 0;//custo do vertice 1 = 0
-    parent[1] = -1;//Vertice 1 nao tem pai
+    cost[1] = 0;
+    parent[1] = -1;
     queue.push({0, 1});
 
     while (not queue.empty())
@@ -45,14 +45,13 @@ pair<vector<pair<int, int>>, int> prim(vector<pair<int, int>> adj[], int N, int 
         }
     }
 
-    int summcost = 0;
-    for (int i = 2; i <= N; i++)
-    {
+   
+    for (int i = 2; i <= N; i++){
         result.push_back(make_pair(i, parent[i]));
-        summcost += cost[i];
+        sum += cost[i];
     }
 
-    return make_pair(result, summcost);
+    return result;
 }
 
 int main(int argc, char *argv[])
@@ -110,10 +109,10 @@ int main(int argc, char *argv[])
 
     fin.close();
 
-    pair<vector<pair<int, int>>, int> result = prim(adj, N, init);
+    int minimum_cost = 0;
+    vector<pair<int, int>> result = prim(adj, N, minimum_cost, init);
 
-    vector<pair<int, int>> pairsArray = result.first; 
-    sort(pairsArray.begin(), pairsArray.end(), compare);
+    sort(result.begin(), result.end(), compare);
 
     if (!(out == "")){
         ofstream fout(out);
@@ -122,21 +121,21 @@ int main(int argc, char *argv[])
             return 1;
         }
         if (ans){
-            for (auto sample : pairsArray)
+            for (auto sample : result)
                 fout << "(" << sample.second << "," << sample.first << ") ";
         }
         else{
-            fout << " " << result.second << endl;
+            fout << " " << minimum_cost << endl;
         }
         fout.close();
     }
 
     if(ans){
-        for (auto sample : pairsArray)
+        for (auto sample : result)
             cout << "(" << sample.second << "," << sample.first << ") ";
     }
     else{
-        cout << " " << result.second << endl;
+        cout << " " << minimum_cost << endl;
     }
 
     return 0;
