@@ -9,19 +9,19 @@ vector<int> path(int init, int V, list<pares> * arestas)
     priority_queue<pares, vector<pares>, greater<pares>> queue;
     vector<int> dist(V + 1, max);
 
-    queue.push(make_pair(0, src));
+    queue.push(make_pair(0, init));
     dist[init] = 0;
 
-    while (not queue.empty()) {
+    while (not queue.empty()){
         int u = queue.top().second;
         queue.pop();
         
         list<pair<int, int>>::iterator i;
-        for (i = arestas[u].begin(); i != arestas[u].end(); i++) {
+        for (i = arestas[u].begin(); i != arestas[u].end(); i++){
             int v = (*i).first;
             int peso = (*i).second;
 
-            if (dist[v] > dist[u] + peso) {
+            if (dist[v] > dist[u] + peso){
                 dist[v] = dist[u] + peso;
                 queue.push(make_pair(dist[v], v));
             }
@@ -37,10 +37,8 @@ int main(int argc, char *argv[])
     string out = "";
     int initial = 1;
 
-    for (int i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-h") == 0)
-        {
+    for (int i = 1; i < argc; i++){
+        if (strcmp(argv[i], "-h") == 0){
             cout << "Help:" << endl;
             cout << "-h: mostra o help" << endl;
             cout << "-o <arquivo>: redireciona a saida para o 'arquivo'" << endl;
@@ -49,16 +47,13 @@ int main(int argc, char *argv[])
             
             return 0;
         }
-        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1){
             out = argv[++i];
         }
-        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1){
             in = argv[++i];
         }
-        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1){
             initial = atoi(argv[++i]);
         }
     }
@@ -81,8 +76,7 @@ int main(int argc, char *argv[])
     int a, b, cost;
     list<pair<int, int>> arestas[V + 1];
 
-    for (int i = 0; i < E; i++)
-    {
+    for (int i = 0; i < E; i++){
         fin >> a >> b >> cost;
         arestas[b].push_back(make_pair(a, cost));
         arestas[a].push_back(make_pair(b, cost));
@@ -92,11 +86,9 @@ int main(int argc, char *argv[])
 
     vector<int> distances = path(initial, V, arestas);
 
-    if (not (out == ""))
-    {
+    if (not (out == "")){
         ofstream fout(out);
-        if (not fout)
-        {
+        if (not fout){
             cerr << "Could not open output file: " << out << endl;
             return 1;
         }
