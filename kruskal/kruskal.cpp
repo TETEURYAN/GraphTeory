@@ -148,10 +148,6 @@ int main(int argc, char *argv[])
 
     fin.close();
 
-    // for(int i = 0; i < m; i++){
-    //     cout << "(" << arestas[i].first.first+1 << ", " << arestas[i].first.second+1 << ", " << arestas[i].second << ")" << endl;
-    // }
-
     int sum = 0;
     vector<pair<int, int>> vertex = kruskal(N, arestas, sum);
     int tam = vertex.size();
