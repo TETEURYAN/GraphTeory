@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
                 fout << "(" << sample.second << "," << sample.first << ") ";
         }
         else{
-            fout << " " << minimum_cost << endl;
+            fout << minimum_cost << endl;
         }
         fout.close();
     }
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
             cout << "(" << sample.second << "," << sample.first << ") ";
     }
     else{
-        cout << " " << minimum_cost << endl;
+        cout << minimum_cost << endl;
     }
 
     return 0;

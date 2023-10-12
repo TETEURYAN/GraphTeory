@@ -3,21 +3,27 @@ using namespace std;
 #define max INT_MAX/2
 
 
-vector<vector<int>> floyd(int src, int V, const vector<vector<int>> & edges ){
+vector<vector<int>> floyd(int src, int V, vector<vector<int>> & edges ){
     vector<vector<int>> dist(V, vector<int>(V+1, max));
 
-    for(int i = 0; i < V; i++)
-        for(int j = 0; j < V; j++)
+    for(int i = 0; i < V; i++){
+        for(int j = 0; j < V; j++){
             dist[i][j] = edges[i][j];
+            if(i == j) dist[i][j] == 0;
+        }
+    }
 
-    dist[src][0] = 0;
-    dist[0][src] = 0;
-    for(int i = 0; i < V; i++)        
-        for(int j = 0; j < V; j++)
-            for(int k = 0; k < V; k++)
-                if (dist[i][j] > (dist[i][k] + dist[k][j]) and (dist[k][j] != max and dist[i][k] != max))
+
+    for(int i = 0; i < V; i++){
+        for(int j = 0; j < V; j++){
+            for(int k = 0; k < V; k++){
+                if (dist[i][j] > (dist[i][k] + dist[k][j]) and (dist[k][j] != max and dist[i][k] != max)){
                     dist[i][j] = dist[i][k] + dist[k][j];
-            
+                }
+            }
+        }
+    }   
+
     return dist;
 }
 
@@ -85,10 +91,10 @@ int main(int argc, char *argv[])
         }
         for (int i = 1; i <= V; ++i){
             if(distances[initial][i-1] != max){
-                fout << i << ":" << distances[initial][i-1] << " ";
+                fout << i << ":" << distances[initial][i-1] << endl;
             }
             else{
-                fout << i << ":" << -1 << " ";
+                fout << i << ":" << -1 << endl;
             }
         }
         fout << endl;

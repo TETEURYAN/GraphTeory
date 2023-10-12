@@ -94,7 +94,12 @@ int main(int argc, char *argv[])
         }
         
         for (int i = 1; i <= V; ++i) {
-            fout << i << ":" << distances[i] << " ";
+            if(distances[i] != max){
+                fout << i << ":" << distances[i] << " ";
+            }
+            else{
+                fout << i << ":" << -1 << " ";
+            }
         }
         fout << endl;
 
