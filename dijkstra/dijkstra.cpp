@@ -47,13 +47,13 @@ int main(int argc, char *argv[])
             
             return 0;
         }
-        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-o") == 0 and i < argc - 1){
             out = argv[++i];
         }
-        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-f") == 0 and i < argc - 1){
             in = argv[++i];
         }
-        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1){
+        else if (strcmp(argv[i], "-i") == 0 and i < argc - 1){
             initial = atoi(argv[++i]);
         }
     }

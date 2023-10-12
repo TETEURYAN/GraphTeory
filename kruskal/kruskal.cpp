@@ -35,7 +35,7 @@ struct UF {
         rank[x] = 0;
     }
 
-    void Union(int x, int y){
+    void Union(int x, int y){ //rank apra pegar fazer o union
         if(this->rank[x] >= this->rank[y]){
             this->pai[y] = x;
             if (this->rank[x] == this->rank[y]){
@@ -47,39 +47,20 @@ struct UF {
         }
     }
 
-
-    void printPai(){
-        cout << "[";
-        for (int i  = 0; i < tamanho; i++)
-        {
-            cout << pai[i]+1<< ", ";
-        }
-        cout << "]" << endl;
-    }
-
-
 };
 
-vector<pair<int, int>> kruskal(int N, vector<pair<pair<int, int>, int>> & arestas,  int &sum)
-{
+vector<pair<int, int>> kruskal(int N, vector<pair<pair<int, int>, int>> & arestas,  int &sum){
     UF CJ(N);
     vector<pair<int, int>> MST;
 
     sort(arestas.begin(), arestas.end(), compare);
 
-    for (int i = 0; i < N; i++)
-    {
+    for (int i = 0; i < N; i++){
         CJ.Make_Set(i);
     }
 
-    
-    for (auto sample: arestas)
-    {
-        //cout << "Find1: " << CJ.Find(sample.first.first)+1 << " Find2: " << CJ.Find(sample.first.second)+1 << endl;
-        if (CJ.Find(sample.first.first) != CJ.Find(sample.first.second))
-        {
-            //cout << "(" << sample.first.first+1 << "," <<sample.first.second +1 << ")" << " Peso: " << sample.second << endl;
-            //CJ.printPai();
+    for (auto sample: arestas){
+        if (CJ.Find(sample.first.first) != CJ.Find(sample.first.second)){
             MST.push_back({sample.first.first, sample.first.second});
             sum += sample.second;
             CJ.Union(CJ.Find(sample.first.first), CJ.Find(sample.first.second));
@@ -96,10 +77,8 @@ int main(int argc, char *argv[])
     string output_file = "";
     bool ans = false;
 
-    for (int i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-h") == 0)
-        {
+    for (int i = 1; i < argc; i++){
+        if (strcmp(argv[i], "-h") == 0){
             cout << "Help:" << endl;
             cout << "-h: mostra o help" << endl;
             cout << "-o <arquivo>: redireciona a saida para o 'arquivo'" << endl;
@@ -107,29 +86,24 @@ int main(int argc, char *argv[])
             cout << "-s: mostra a solução (em ordem crescente)" << endl;
             return 0;
         }
-        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1){
             output_file = argv[++i];
         }
-        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1)
-        {
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1){
             input_file = argv[++i];
         }
-        else if (strcmp(argv[i], "-s") == 0)
-        {
+        else if (strcmp(argv[i], "-s") == 0){
             ans = true;
         }
     }
 
-    if (input_file == "")
-    {
+    if (input_file == ""){
         cerr << "No input file specified. Use the -f parameter." << endl;
         return 1;
     }
 
     ifstream fin(input_file);
-    if (!fin)
-    {
+    if (!fin){
         cerr << "Could not open input file: " << input_file << endl;
         return 1;
     }
@@ -140,8 +114,7 @@ int main(int argc, char *argv[])
     vector<pair<pair<int, int>, int>> arestas;
 
     int a, b, wt;
-    for (int i = 0; i < m; i++)
-    {
+    for (int i = 0; i < m; i++){
         fin >> a >> b >> wt;
         arestas.push_back({{a-1, b-1}, wt});
     }
