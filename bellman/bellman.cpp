@@ -9,11 +9,6 @@ struct edge
     int weight;
 };
 
-void print(vector<int> arr, int tam){
-    for(int i = 0; i < tam; i++)
-        cout << arr[i] << " ";
-}
-
 vector<int> bellman(vector<edge> adj, int V, int src){
     vector<int> dist(V);
 
@@ -86,7 +81,6 @@ int main(int argc, char *argv[])
     for (int i = 0; i < E; i++){
         fin >> a >> b >> cost;
         adj.push_back({a-1, b-1, cost});
-        //adj.push_back({b-1, a-1, cost});
     }
 
     fin.close();
