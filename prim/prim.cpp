@@ -1,6 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool compare(const pair<int, int>&a, const pair<int, int> &b){
+    return a.second < b.second;
+}
+
 vector<pair<int, int>> prim(vector<pair<int, int>> adj[], int N, int & sum, int init) 
 {
     vector<pair<int, int>> result; 

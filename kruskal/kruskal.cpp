@@ -95,7 +95,6 @@ int main(int argc, char *argv[])
     string input_file = "";
     string output_file = "";
     bool ans = false;
-    int startVertex = 1;
 
     for (int i = 1; i < argc; i++)
     {
@@ -119,10 +118,6 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[i], "-s") == 0)
         {
             ans = true;
-        }
-        else if (strcmp(argv[i], "-i") == 0 && i < argc - 1)
-        {
-            startVertex = atoi(argv[++i]);
         }
     }
 
@@ -159,9 +154,10 @@ int main(int argc, char *argv[])
 
     int sum = 0;
     vector<pair<int, int>> vertex = kruskal(N, arestas, sum);
+    int tam = vertex.size();
 
     if(ans){
-        for(int i = 0; i < vertex.size(); i++){
+        for(int i = 0; i < tam; i++){
             cout << "(" << vertex[i].first+1 << "," << vertex[i].second+1 << ")" << endl;
         }
     }
