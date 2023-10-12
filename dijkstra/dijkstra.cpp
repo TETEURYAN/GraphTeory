@@ -102,7 +102,12 @@ int main(int argc, char *argv[])
     }
 
     for (int i = 1; i <= V; ++i) {
-        cout << i << ":" << distances[i] << " ";
+        if(distances[i] != max){
+            cout << i << ":" << distances[i] << " ";
+        }
+        else{
+            cout << i << ":" << -1 << " ";
+        }
     }
     cout << endl;
 
