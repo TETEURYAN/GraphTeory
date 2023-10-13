@@ -1,0 +1,21 @@
+instances/bateria1.mtx 7441
+instances/bateria2.mtx 915
+instances/bateria3.mtx 1026
+instances/bateria4.mtx 4163
+instances/bateria5.mtx 1705
+instances/bateria6.mtx 943
+instances/bateria7.mtx 225
+instances/bateria8.mtx 967
+instances/bateria9.mtx 1983
+instances/bateria10.mtx 2331
+instances/bateria11.mtx 1089
+instances/bateria12.mtx 1940
+instances/bateria13.mtx 3637
+instances/bateria14.mtx 871
+instances/bateria15.mtx 2556
+instances/bateria16.mtx 893
+instances/bateria17.mtx 1429
+instances/bateria18.mtx 884
+instances/bateria19.mtx 1414
+instances/bateria20.mtx 491
+
