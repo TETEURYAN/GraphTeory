@@ -4,7 +4,7 @@ using namespace std;
 
 typedef pair<int, int> pares;
 
-vector<int> path(int init, int V, list<pares> * arestas)
+vector<int> dijkstra(int init, int V, list<pares> * arestas)
 {
     priority_queue<pares, vector<pares>, greater<pares>> queue;
     vector<int> dist(V + 1, max);
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 
     fin.close();
 
-    vector<int> distances = path(initial, V, arestas);
+    vector<int> distances = dijkstra(initial, V, arestas);
 
     if (not (out == "")){
         ofstream fout(out);
