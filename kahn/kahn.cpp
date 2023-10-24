@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 vector<int> kahn(vector<vector<int>> & edges, int V){
 
     map<int,int> degree;
