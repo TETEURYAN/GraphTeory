@@ -73,10 +73,10 @@ int main()
 
     // ifstream fin(in);
 
-    // if (not fin){
-    //     cerr << "Could not open input file: " << in << endl;
-    //     return 1;
-    // }
+    if (not fin){
+        cerr << "Could not open input file: " << in << endl;
+        return 1;
+     }
 
     int V, E;
     cin >> V >> E;
