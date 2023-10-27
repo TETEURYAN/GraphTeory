@@ -1,37 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 vector<int> kahn(vector<vector<int>> & edges, int V){
 
     int indegree[V] = {0};
 		for (int i = 0; i < V; i++) {
 			for (auto it : edges[i]) {
-				indegree[it]++;
+				indegree[it]++; // made a count for each vertice
 			}
 		}
 
-		queue<int> q;
-		for (int i = 0; i < V; i++) 
-			if (indegree[i] == 0) 
-				q.push(i);
-			
+	queue<int> q;
+	for (int i = 0; i < V; i++) 
+		if (indegree[i] == 0) 
+			q.push(i);
 		
-		vector<int> topo;
-		while (!q.empty()) {
-			int node = q.front();
-			q.pop();
-			topo.push_back(node);
-			// node is in your topo sort
-			// so please remove it from the indegree
+    // One by one dequeue vertices from queue and enqueue adjacents if indegree of adjacent becomes 0
 
-			for (auto it : edges[node]) {
-				indegree[it]--;
-				if (indegree[it] == 0) q.push(it);
-			}
+	vector<int> order;
+	while (not q.empty()) {
+		int node = q.front(); // add to topological sort
+		q.pop();
+		order.push_back(node);
+		// node is in your topological sort
+		// so please remove it from the indegree
+
+		for (auto it : edges[node]) {
+			indegree[it]--; //if indegree becomes 0, add do queue to be visited
+			if (indegree[it] == 0) q.push(it);
 		}
-
-		return topo;
+	}
+	return order;
 }
 
 
@@ -106,7 +105,7 @@ int main(int argc, char *argv[])
         }
     }
     cout << endl;
-    
+
 //     vector<vector<int>> graph {
 //     { 1 },
 //     { 6 },
